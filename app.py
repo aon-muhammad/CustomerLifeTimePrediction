@@ -13,21 +13,20 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Explicit CSS to guarantee high-contrast visibility on white background
+# Comprehensive CSS to ensure 100% visibility, contrast, and clean white layout
 st.markdown("""
     <style>
-        /* Force clean white background */
-        .stApp {
+        /* Force clean pure white application background */
+        .stApp, .main, .block-container {
             background-color: #ffffff !important;
         }
         .main .block-container {
-            background-color: #ffffff !important;
             padding-top: 2rem;
             padding-bottom: 2rem;
         }
 
-        /* Typography and high contrast text */
-        h1, h2, h3, h4 {
+        /* Base Typography */
+        h1, h2, h3, h4, h5, h6 {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
             color: #0f172a !important;
             font-weight: 600 !important;
@@ -35,72 +34,181 @@ st.markdown("""
         h1 {
             margin-bottom: 0.2rem !important;
         }
-        p, span, div {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            color: #1e293b;
+
+        /* General text elements */
+        .stMarkdown p, .stMarkdown span, div[data-testid="stMarkdownContainer"] > p {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+            color: #1e293b !important;
+            font-size: 0.95rem;
         }
 
-        /* Widget labels visibility */
-        .stSelectbox label, .stNumberInput label, .stSlider label, .stFileUploader label {
+        /* All Form & Widget Labels */
+        label, [data-testid="stWidgetLabel"], [data-testid="stWidgetLabel"] p, [data-testid="stWidgetLabel"] span {
             color: #0f172a !important;
             font-weight: 600 !important;
             font-size: 0.92rem !important;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
         }
 
-        /* Clean prediction box card */
+        /* Prediction Card Box */
         .prediction-box {
             padding: 1.5rem;
-            border-radius: 6px;
-            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            border: 1px solid #d0dce5;
             background-color: #ffffff;
-            margin-top: 0.8rem;
-            margin-bottom: 0.8rem;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
         }
         .metric-value {
             font-size: 2.2rem;
-            font-weight: 700;
-            color: #0f172a;
+            font-weight: bold;
+            color: #222222 !important;
             line-height: 1.2;
             margin-top: 0.2rem;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
         }
         .metric-label {
-            font-size: 0.85rem;
-            color: #475569;
+            font-size: 0.9rem;
+            color: #666666 !important;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.1em;
             font-weight: 600;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
         }
 
-        /* Tabs styling */
-        .stTabs [data-baseweb="tab-list"] {
-            gap: 20px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .stTabs [data-baseweb="tab"] {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #64748b !important;
-            padding-bottom: 8px;
-        }
-        .stTabs [aria-selected="true"] {
-            color: #0f172a !important;
-            border-bottom: 2px solid #0f172a !important;
-        }
-
-        /* Input fields readability */
+        /* Input fields readability (Numbers, Text) */
         div[data-baseweb="input"] {
             background-color: #ffffff !important;
             border: 1px solid #cbd5e1 !important;
             border-radius: 4px !important;
         }
+        div[data-baseweb="input"] input {
+            color: #0f172a !important;
+            background-color: #ffffff !important;
+            -webkit-text-fill-color: #0f172a !important;
+            font-size: 0.95rem !important;
+        }
+        div[data-baseweb="input"] button, div[data-baseweb="input"] svg {
+            fill: #0f172a !important;
+            color: #0f172a !important;
+        }
+
+        /* Selectboxes */
         div[data-baseweb="select"] {
             background-color: #ffffff !important;
             border: 1px solid #cbd5e1 !important;
             border-radius: 4px !important;
         }
-        input {
+        div[data-baseweb="select"] * {
             color: #0f172a !important;
+            -webkit-text-fill-color: #0f172a !important;
+        }
+        div[data-baseweb="select"] svg {
+            fill: #0f172a !important;
+        }
+        ul[role="listbox"], [data-baseweb="menu"], [data-baseweb="popover"] {
+            background-color: #ffffff !important;
+        }
+        li[role="option"], [data-baseweb="menu"] * {
+            color: #0f172a !important;
+            -webkit-text-fill-color: #0f172a !important;
+        }
+        li[role="option"]:hover, [aria-selected="true"] {
+            background-color: #f1f5f9 !important;
+        }
+
+        /* Sliders */
+        div[data-testid="stSlider"] div, div[data-testid="stSlider"] span {
+            color: #0f172a !important;
+        }
+
+        /* Primary Buttons - High contrast white text on navy */
+        button[kind="primary"], button[data-testid="baseButton-primary"] {
+            background-color: #1e3a8a !important;
+            border: 1px solid #1e3a8a !important;
+            border-radius: 4px !important;
+        }
+        button[kind="primary"] *, button[data-testid="baseButton-primary"] * {
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+            font-weight: 600 !important;
+        }
+        button[kind="primary"]:hover {
+            background-color: #1e40af !important;
+            border-color: #1e40af !important;
+        }
+
+        /* Secondary / Download Buttons - Dark text on clean white/border */
+        button[kind="secondary"], button[data-testid="baseButton-secondary"] {
+            background-color: #ffffff !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 4px !important;
+        }
+        button[kind="secondary"] *, button[data-testid="baseButton-secondary"] * {
+            color: #0f172a !important;
+            -webkit-text-fill-color: #0f172a !important;
+            font-weight: 600 !important;
+        }
+        button[kind="secondary"]:hover {
+            background-color: #f8fafc !important;
+            border-color: #94a3b8 !important;
+        }
+
+        /* Tabs Navigation */
+        .stTabs [data-baseweb="tab-list"] {
+            gap: 24px !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+        }
+        .stTabs [data-baseweb="tab"] {
+            font-size: 0.95rem !important;
+            font-weight: 600 !important;
+            padding-bottom: 10px !important;
+        }
+        .stTabs [data-baseweb="tab"] p {
+            color: #64748b !important;
+        }
+        .stTabs [data-baseweb="tab"][aria-selected="true"] p {
+            color: #0f172a !important;
+            font-weight: 700 !important;
+        }
+        .stTabs [data-baseweb="tab-highlight"] {
+            background-color: #1e3a8a !important;
+        }
+
+        /* File Uploader */
+        [data-testid="stFileUploadDropzone"] {
+            background-color: #f8fafc !important;
+            border: 2px dashed #cbd5e1 !important;
+            border-radius: 6px !important;
+        }
+        [data-testid="stFileUploadDropzone"] * {
+            color: #334155 !important;
+        }
+
+        /* Alert / Context Box */
+        div[data-testid="stAlert"] {
+            background-color: #f8fafc !important;
+            border: 1px solid #e2e8f0 !important;
+            border-left: 4px solid #1e3a8a !important;
+            border-radius: 4px !important;
+        }
+        div[data-testid="stAlert"] * {
+            color: #1e293b !important;
+        }
+
+        /* Code snippets */
+        pre, code {
+            background-color: #f8fafc !important;
+            color: #0f172a !important;
+            border: 1px solid #e2e8f0 !important;
+        }
+
+        /* Horizontal Divider */
+        hr {
+            border-top: 1px solid #e2e8f0 !important;
+            margin-top: 1.5rem !important;
+            margin-bottom: 1.5rem !important;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -115,7 +223,7 @@ def load_trained_model():
     config_path = "feature_config.json"
     
     if not (os.path.exists(model_path) and os.path.exists(scaler_path)):
-        st.error("Model artifacts not found. Please ensure final_model.keras and scaler.joblib exist.")
+        st.error("Model artifacts not found. Please ensure final_model.keras and scaler.joblib exist in the project directory.")
         st.stop()
         
     model = tf.keras.models.load_model(model_path)
@@ -142,7 +250,7 @@ def load_trained_model():
 with st.spinner("Initializing predictive model, please wait..."):
     final_model, scaler, config = load_trained_model()
 
-# Category mappings
+# Category mappings matching model training pipeline
 COVERAGE_MAP = {
     "Basic": 0,
     "Extended": 1,
@@ -158,7 +266,7 @@ EDUCATION_MAP = {
 }
 
 # -------------------------------------------------------------
-# Helper Functions
+# Feature Preprocessing & Inference Helpers
 # -------------------------------------------------------------
 def transform_input(response_str, coverage_str, education_str, income_val,
                     monthly_premium_val, months_claim_val, months_inception_val,
@@ -167,6 +275,7 @@ def transform_input(response_str, coverage_str, education_str, income_val,
     cov_val = COVERAGE_MAP[coverage_str]
     edu_val = EDUCATION_MAP[education_str]
     
+    # Skewness corrections matching training pipeline
     resp_transformed = np.log1p(resp_val)
     cov_transformed = np.log1p(cov_val)
     premium_transformed = np.log1p(monthly_premium_val)
@@ -225,14 +334,14 @@ st.title("Customer Lifetime Value Predictor")
 st.markdown("Enter customer demographic, policy, and claims metrics below to evaluate projected Customer Lifetime Value (CLV).")
 
 st.markdown("---")
-col_m1, col_m2, col_m3 = st.columns(3)
-with col_m1:
+col_metrics_1, col_metrics_2, col_metrics_3 = st.columns(3)
+with col_metrics_1:
     st.markdown('<div class="metric-label">Model Type</div>', unsafe_allow_html=True)
     st.markdown('<div class="metric-value">Deep Neural Network (TensorFlow)</div>', unsafe_allow_html=True)
-with col_m2:
+with col_metrics_2:
     st.markdown('<div class="metric-label">Validation R² Score</div>', unsafe_allow_html=True)
     st.markdown(f'<div class="metric-value">{config["r2_score"]:.4f}</div>', unsafe_allow_html=True)
-with col_m3:
+with col_metrics_3:
     st.markdown('<div class="metric-label">Validation MAE (USD)</div>', unsafe_allow_html=True)
     st.markdown(f'<div class="metric-value">${config["mae_dollar"]:,.2f}</div>', unsafe_allow_html=True)
 st.markdown("---")
@@ -247,101 +356,163 @@ tab1, tab2, tab3 = st.tabs(["Single Prediction", "Batch Analysis", "Model Archit
 # =============================================================
 with tab1:
     st.subheader("Customer Demographics and Policy Information")
-    c1, c2, c3, c4 = st.columns(4)
-    with c1:
-        education_input = st.selectbox("Education Level", options=list(EDUCATION_MAP.keys()), index=1)
-    with c2:
-        income_input = st.number_input("Annual Income (USD)", min_value=0.0, max_value=250000.0, value=37600.0, step=1000.0)
-    with c3:
-        coverage_input = st.selectbox("Coverage Level", options=list(COVERAGE_MAP.keys()), index=0)
-    with c4:
-        policies_input = st.number_input("Number of Policies", min_value=1, max_value=9, value=2, step=1)
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        education_input = st.selectbox(
+            "Education Level",
+            options=list(EDUCATION_MAP.keys()),
+            index=1,
+            key="input_education"
+        )
+    with col2:
+        income_input = st.number_input(
+            "Annual Income (USD)",
+            min_value=0.0,
+            max_value=250000.0,
+            value=37600.0,
+            step=1000.0,
+            key="input_income"
+        )
+    with col3:
+        coverage_input = st.selectbox(
+            "Coverage Level",
+            options=list(COVERAGE_MAP.keys()),
+            index=0,
+            key="input_coverage"
+        )
+    with col4:
+        policies_input = st.number_input(
+            "Number of Policies",
+            min_value=1,
+            max_value=9,
+            value=2,
+            step=1,
+            key="input_policies"
+        )
 
     st.subheader("Premium, Claims, and Account History")
-    c5, c6, c7, c8 = st.columns(4)
-    with c5:
-        premium_input = st.number_input("Monthly Premium Auto (USD)", min_value=10.0, max_value=1000.0, value=93.0, step=5.0)
-    with c6:
-        claim_input = st.number_input("Total Claim Amount (USD)", min_value=0.0, max_value=10000.0, value=434.0, step=25.0)
-    with c7:
-        inception_input = st.slider("Months Since Policy Inception", min_value=0, max_value=120, value=48)
-    with c8:
-        last_claim_input = st.slider("Months Since Last Claim", min_value=0, max_value=36, value=15)
+    col5, col6, col7, col8 = st.columns(4)
+    with col5:
+        premium_input = st.number_input(
+            "Monthly Premium Auto (USD)",
+            min_value=10.0,
+            max_value=1000.0,
+            value=93.0,
+            step=5.0,
+            key="input_premium"
+        )
+    with col6:
+        claim_input = st.number_input(
+            "Total Claim Amount (USD)",
+            min_value=0.0,
+            max_value=10000.0,
+            value=434.0,
+            step=25.0,
+            key="input_claim"
+        )
+    with col7:
+        inception_input = st.slider(
+            "Months Since Policy Inception",
+            min_value=0,
+            max_value=120,
+            value=48,
+            key="input_inception"
+        )
+    with col8:
+        last_claim_input = st.slider(
+            "Months Since Last Claim",
+            min_value=0,
+            max_value=36,
+            value=15,
+            key="input_last_claim"
+        )
 
-    c9, c10 = st.columns(2)
-    with c9:
-        response_input = st.selectbox("Response to Renewal / Marketing Offer", options=["No", "Yes"], index=0)
-    with c10:
-        day_input = st.slider("Policy Effective Day of Month", min_value=1, max_value=31, value=15)
+    col9, col10 = st.columns(2)
+    with col9:
+        response_input = st.selectbox(
+            "Response to Renewal / Marketing Offer",
+            options=["No", "Yes"],
+            index=0,
+            key="input_response"
+        )
+    with col10:
+        day_input = st.slider(
+            "Policy Effective Day of Month",
+            min_value=1,
+            max_value=31,
+            value=15,
+            key="input_day"
+        )
 
     st.markdown("---")
-    
-    evaluate_clicked = st.button("Evaluate Customer Lifetime Value", type="primary", use_container_width=True)
-    
-    # Store in session state so results persist across interactions
-    if evaluate_clicked:
-        st.session_state['has_evaluated'] = True
+    evaluate_button = st.button("Evaluate Customer Lifetime Value", type="primary", use_container_width=True)
 
-    if st.session_state.get('has_evaluated', False):
-        scaled_x = transform_input(
-            response_input, coverage_input, education_input, income_input,
-            premium_input, last_claim_input, inception_input,
-            policies_input, claim_input, day_input
-        )
-        predicted_clv = predict_clv(scaled_x)
-        tier_label, tier_color, context_note = get_tier_info(predicted_clv)
+    # Compute prediction (always computed and rendered for complete visibility)
+    scaled_x = transform_input(
+        response_input, coverage_input, education_input, income_input,
+        premium_input, last_claim_input, inception_input,
+        policies_input, claim_input, day_input
+    )
+    predicted_clv = predict_clv(scaled_x)
+    tier_label, tier_color, context_note = get_tier_info(predicted_clv)
+
+    st.subheader("Evaluation Results")
+    res_col1, res_col2 = st.columns(2)
+    with res_col1:
+        st.markdown(f'''
+            <div class="prediction-box">
+                <div class="metric-label">Estimated Customer Lifetime Value</div>
+                <div class="metric-value">${predicted_clv:,.2f}</div>
+            </div>
+        ''', unsafe_allow_html=True)
         
-        st.subheader("Evaluation Results")
-        res1, res2 = st.columns(2)
-        with res1:
-            st.markdown(f'''
-                <div class="prediction-box">
-                    <div class="metric-label">Estimated Customer Lifetime Value</div>
-                    <div class="metric-value">${predicted_clv:,.2f}</div>
-                </div>
-            ''', unsafe_allow_html=True)
-            
-        with res2:
-            st.markdown(f'''
-                <div class="prediction-box">
-                    <div class="metric-label">Customer Value Tier</div>
-                    <div class="metric-value" style="color:{tier_color};">{tier_label}</div>
-                </div>
-            ''', unsafe_allow_html=True)
-            
-        st.subheader("Model Decision Context")
-        st.info(context_note)
-        
-        # What-If Scenario Analysis
-        st.subheader("What-If Scenario Analysis")
-        st.markdown("Evaluate how the projected lifetime value changes if the customer acquires additional active policies:")
-        sim_policies = st.slider("Simulate Total Policies Held", min_value=1, max_value=9, value=policies_input)
-        
-        sim_scaled = transform_input(
-            response_input, coverage_input, education_input, income_input,
-            premium_input, last_claim_input, inception_input,
-            sim_policies, claim_input, day_input
-        )
-        sim_clv = predict_clv(sim_scaled)
-        delta_val = sim_clv - predicted_clv
-        
-        sim1, sim2 = st.columns(2)
-        with sim1:
-            st.markdown(f'''
-                <div class="prediction-box">
-                    <div class="metric-label">Simulated Customer Lifetime Value</div>
-                    <div class="metric-value">${sim_clv:,.2f}</div>
-                </div>
-            ''', unsafe_allow_html=True)
-        with sim2:
-            delta_color = "#16a34a" if delta_val >= 0 else "#dc2626"
-            delta_sign = "+" if delta_val >= 0 else ""
-            st.markdown(f'''
-                <div class="prediction-box">
-                    <div class="metric-label">Projected Value Difference</div>
-                    <div class="metric-value" style="color:{delta_color};">{delta_sign}${delta_val:,.2f}</div>
-                </div>
-            ''', unsafe_allow_html=True)
+    with res_col2:
+        st.markdown(f'''
+            <div class="prediction-box">
+                <div class="metric-label">Customer Value Tier</div>
+                <div class="metric-value" style="color:{tier_color};">{tier_label}</div>
+            </div>
+        ''', unsafe_allow_html=True)
+
+    st.subheader("Model Decision Context")
+    st.info(context_note)
+
+    # What-If Scenario Analysis
+    st.subheader("What-If Scenario Analysis")
+    st.markdown("Evaluate how the projected lifetime value changes if the customer acquires additional active policies:")
+    sim_policies = st.slider(
+        "Simulate Total Policies Held",
+        min_value=1,
+        max_value=9,
+        value=int(policies_input),
+        key="sim_policies_slider"
+    )
+
+    sim_scaled = transform_input(
+        response_input, coverage_input, education_input, income_input,
+        premium_input, last_claim_input, inception_input,
+        sim_policies, claim_input, day_input
+    )
+    sim_clv = predict_clv(sim_scaled)
+    delta_val = sim_clv - predicted_clv
+
+    sim_col1, sim_col2 = st.columns(2)
+    with sim_col1:
+        st.markdown(f'''
+            <div class="prediction-box">
+                <div class="metric-label">Simulated Customer Lifetime Value</div>
+                <div class="metric-value">${sim_clv:,.2f}</div>
+            </div>
+        ''', unsafe_allow_html=True)
+    with sim_col2:
+        delta_color = "#16a34a" if delta_val >= 0 else "#dc2626"
+        delta_sign = "+" if delta_val >= 0 else ""
+        st.markdown(f'''
+            <div class="prediction-box">
+                <div class="metric-label">Projected Value Difference</div>
+                <div class="metric-value" style="color:{delta_color};">{delta_sign}${delta_val:,.2f}</div>
+            </div>
+        ''', unsafe_allow_html=True)
 
 # =============================================================
 # TAB 2: Batch Analysis (CSV Upload)
@@ -370,11 +541,11 @@ with tab2:
         mime="text/csv"
     )
     
-    uploaded_file = st.file_uploader("Upload Customer CSV File", type=["csv"])
+    uploaded_file = st.file_uploader("Upload Customer CSV File", type=["csv"], key="batch_uploader")
     if uploaded_file is not None:
         try:
             batch_df = pd.read_csv(uploaded_file)
-            st.write(f"Loaded {len(batch_df)} customer rows.")
+            st.markdown(f"**Loaded {len(batch_df)} customer rows.**")
             
             required_cols = [
                 'Response', 'Coverage', 'Education', 'Income', 'Monthly Premium Auto',
