@@ -1,0 +1,16 @@
+{
+  "selected_features": [
+    "Response",
+    "Coverage",
+    "Education",
+    "Income",
+    "Monthly Premium Auto",
+    "Months Since Last Claim",
+    "Months Since Policy Inception",
+    "Number of Policies",
+    "Total Claim Amount",
+    "date"
+  ],
+  "r2_score": 0.8890056002613702,
+  "mae_dollar": 1719.6146481260091
+}
